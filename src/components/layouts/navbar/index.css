@@ -1,0 +1,11 @@
+.navbar{
+    display: flex;
+    background-color: rgb(250 204 21);
+    justify-content: space-evenly;
+    padding: 15px;
+    font-weight: 500;
+    font-family: Roboto;
+}
+.navbar h1{
+    font-size: 2.6rem;
+}
