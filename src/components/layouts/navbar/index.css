@@ -2,10 +2,24 @@
     display: flex;
     background-color: rgb(250 204 21);
     justify-content: space-evenly;
-    padding: 15px;
+    align-items: center;
+    padding: 15px 20px;
     font-weight: 500;
     font-family: Roboto;
 }
 .navbar h1{
-    font-size: 2.6rem;
+    font-size: 1.7rem;
+    margin-right: auto;
+    font-weight: 300;
+    font-style: bold;
+    text-transform: uppercase;
+    word-spacing: 5px;
+    opacity: 0.8;
+    -webkit-text-stroke: 0.2px black;
+}
+.navbar h2{
+    text-transform: uppercase;
+    opacity: 0.8;
+    font-weight: 300;
+    -webkit-text-stroke: 0.5px black;
 }
