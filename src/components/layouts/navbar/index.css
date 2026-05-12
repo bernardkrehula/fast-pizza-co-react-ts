@@ -1,7 +1,7 @@
 .navbar{
     display: flex;
     background-color: rgb(250 204 21);
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
     font-weight: 500;
@@ -9,7 +9,6 @@
 }
 .navbar h1{
     font-size: 1.7rem;
-    margin-right: auto;
     font-weight: 300;
     font-style: bold;
     text-transform: uppercase;
