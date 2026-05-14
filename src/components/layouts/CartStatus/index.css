@@ -1,0 +1,26 @@
+.cart-status {
+  display: flex;
+  height: 60px;
+  background-color: rgb(35, 35, 35);
+  color: white;
+  margin-top: auto;
+  align-items: center;
+  padding: 25px;
+  text-transform: uppercase;
+}
+.pizzas-info {
+  display: flex;
+  gap: 15px;
+}
+.cart-status h4 {
+  font-weight: 300;
+  -webkit-text-stroke: 0.2px rgb(255, 255, 255);
+  font-size: 1.6rem;
+}
+.cart-status h5 {
+  cursor: pointer;
+  margin-left: auto;
+  font-weight: 300;
+  font-size: 1.5rem;
+  -webkit-text-stroke: 0.2px rgb(255, 255, 255);
+}
