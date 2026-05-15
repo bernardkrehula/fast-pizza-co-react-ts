@@ -1,13 +1,12 @@
-.menu{
-    background-color: rgb(225, 241, 255, 0.4);
-    padding-top: 10px;
-    overflow: scroll;
-    height: auto;
+.menu {
+  padding-top: 10px;
+  overflow: auto;
+  height: auto;
 }
-.menu-list{
-    display: flex;
-    flex-direction: column;
-    width: 750px;
-    margin: 0 auto;
-    gap: 5px;
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  width: 750px;
+  margin: 0 auto;
+  gap: 5px;
 }

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 const CartStatus = ({
@@ -7,6 +8,10 @@ const CartStatus = ({
   totalPrice: number;
   totalAmount: number;
 }) => {
+  const navigate = useNavigate();
+
+  const openCart = () => navigate('/cart');
+
   return (
     <div className="cart-status">
       <div className="pizzas-info">
@@ -14,7 +19,7 @@ const CartStatus = ({
         <h4>€{totalPrice.toFixed(2)}</h4>
       </div>
 
-      <h5>Open cart →</h5>
+      <h5 onClick={openCart}>Open cart →</h5>
     </div>
   );
 };
