@@ -1,0 +1,72 @@
+.meal {
+  display: flex;
+  height: 110px;
+  justify-content: space-between;
+  padding: 6px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+}
+.meal img {
+  object-fit: contain;
+}
+.soldMeal {
+  filter: grayscale(100%);
+}
+.meal button {
+  font-size: 1.3rem;
+  padding: 10px 15px;
+  height: fit-content;
+  margin-top: auto;
+}
+.name-ingredients-price {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  padding: 5px 0;
+  margin-right: auto;
+}
+.name-ingredients-price h2 {
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.7);
+  width: fit-content;
+  margin-bottom: 5px;
+}
+.ingridients {
+  display: flex;
+  gap: 4px;
+}
+.ingridients h3 {
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 300;
+  -webkit-text-stroke: 0.2px black;
+}
+.unit-price,
+.sold-out {
+  margin-right: auto;
+  width: fit-content;
+  height: fit-content;
+  margin-top: auto;
+  font-size: 1.4rem;
+  font-weight: 300;
+  -webkit-text-stroke: 0.2px black;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.meal-amount{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: auto;
+  font-size: 1.5rem;
+}
+.meal-amount button{
+  font-size: 1.6rem;
+  padding: 8px 14px;
+  border-radius: 100px;
+  width: fit-content;
+}
+
