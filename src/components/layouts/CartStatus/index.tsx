@@ -1,16 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import { useAppSelector } from "../../../app/hooks";
 
-const CartStatus = ({
-  totalPrice,
-  totalAmount,
-}: {
-  totalPrice: number;
-  totalAmount: number;
-}) => {
+const CartStatus = () => {
+  const orders = useAppSelector(state => state.orders.orders);
   const navigate = useNavigate();
 
-  const openCart = () => navigate('/cart');
+  //Tu isto pomaknuti total price i total amount da se racunaju u slice
+  const totalPrice = orders.reduce((accumulator: number, meal) => {
+    const { unitPrice, amount } = meal;
+    return accumulator + amount * unitPrice;
+  }, 0);
+
+  const totalAmount = orders.reduce(
+    (accumulator: number, meal) => {
+      const { amount } = meal;
+      return accumulator + amount;
+    },
+    0,
+  );
+
+  const openCart = () => navigate("/cart");
 
   return (
     <div className="cart-status">
