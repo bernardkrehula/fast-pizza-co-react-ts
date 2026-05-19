@@ -1,0 +1,35 @@
+.search-bar {
+  padding: 9px 15px;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  width: 280px;
+  border: none;
+  opacity: 0.8;
+  font-weight: 300;
+  cursor: pointer;
+  transition: 0.2s all;
+
+  &:focus-within {
+    outline: 4px solid rgb(240, 197, 25);
+  }
+}
+.default-input {
+  transition: 0.3s all;
+  &:focus-within {
+    width: 310px;
+  }
+}
+.name-input {
+  margin-top: 15px;
+  padding: 13px 15px;
+  border-radius: 30px;
+  box-shadow: 0 0 5px 1px rgb(0, 0, 0, 0.1);
+  height: 100%;
+}
+.secondary {
+  box-shadow: 0 0 5px 1px rgb(0, 0, 0, 0.1);
+  height: 100%;
+}
+.secondary:hover{
+  background-color: transparent;
+}
