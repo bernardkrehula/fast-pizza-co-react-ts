@@ -1,0 +1,39 @@
+.checkout {
+  width: 750px;
+  margin: 25px auto;
+  color: rgb(0, 0, 0, 0.8);
+}
+.checkout-title {
+  display: flex;
+  gap: 5px;
+}
+.checkout-title h2 {
+  font-size: 2.1rem;
+  font-weight: 500;
+}
+.form-inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+.checkbox-priority{
+  display: flex;
+  font-size: 1.7rem;
+  gap: 15px;
+  align-items: center;
+  margin-top: 25px;
+}
+.checkbox-priority input{
+  margin-left: 5px;
+  border: 2px solid black;
+  height: 26px;
+  width: 26px;
+}
+.checkbox-priority input:focus{
+  outline: none;
+}
+.checkout button{
+  float: left;
+  margin-top: 35px;
+}

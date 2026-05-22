@@ -1,24 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "./index.css";
-import { useAppSelector } from "../../../app/hooks";
+import { useSelector } from "react-redux";
+import { selectTotalAmount, selectTotalPrice } from "../../../features/slices/orders-slice";
 
 const CartStatus = () => {
-  const orders = useAppSelector(state => state.orders.orders);
   const navigate = useNavigate();
-
-  //Tu isto pomaknuti total price i total amount da se racunaju u slice
-  const totalPrice = orders.reduce((accumulator: number, meal) => {
-    const { unitPrice, amount } = meal;
-    return accumulator + amount * unitPrice;
-  }, 0);
-
-  const totalAmount = orders.reduce(
-    (accumulator: number, meal) => {
-      const { amount } = meal;
-      return accumulator + amount;
-    },
-    0,
-  );
+  const totalPrice = useSelector(selectTotalPrice);
+  const totalAmount = useSelector(selectTotalAmount);
 
   const openCart = () => navigate("/cart");
 
