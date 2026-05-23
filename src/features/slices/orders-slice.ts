@@ -10,8 +10,8 @@ const ordersSlice = createSlice({
   reducers: {
     increment: (state, actions) => {
       state.orders.find((order) => {
-        if (order.id === actions.payload) {
-          order.amount++;
+        if (order.pizzaId === actions.payload) {
+          order.quantity++;
           order.totalUnitPrice += order.unitPrice;
         }
       });
@@ -20,25 +20,30 @@ const ordersSlice = createSlice({
       const { id, amount } = actions.payload;
 
       state.orders.find((order) => {
-        if (order.id === id) {
-          order.amount--;
+        if (order.pizzaId === id) {
+          order.quantity--;
           order.totalUnitPrice -= order.unitPrice;
         }
       });
       if (amount === 1)
-        state.orders = state.orders.filter((order) => order.id !== id);
+        state.orders = state.orders.filter((order) => order.pizzaId !== id);
     },
     add: (state, actions) => {
-      const { unitPrice } = actions.payload;
+      const { id, unitPrice } = actions.payload;
       const order = {
         ...actions.payload,
-        amount: 1,
+        pizzaId: id,
+        quantity: 1,
         totalUnitPrice: unitPrice,
+        addIngredients: [],
+        removeIngredients: [],
       };
       state.orders.push(order);
     },
     remove: (state, actions) => {
-      state.orders = state.orders.filter(({ id }) => id !== actions.payload);
+      state.orders = state.orders.filter(
+        ({ pizzaId }) => pizzaId !== actions.payload,
+      );
     },
     clear: (state) => {
       state.orders = [];
@@ -47,11 +52,11 @@ const ordersSlice = createSlice({
   selectors: {
     selectTotalPrice: (state) =>
       state.orders.reduce(
-        (acc, { unitPrice, amount = 1 }) => acc + unitPrice * amount,
+        (acc, { unitPrice, quantity = 1 }) => acc + unitPrice * quantity,
         0,
       ),
     selectTotalAmount: (state) =>
-      state.orders.reduce((acc, { amount = 1 }) => acc + amount, 0),
+      state.orders.reduce((acc, { quantity = 1 }) => acc + quantity, 0),
   },
 });
 
