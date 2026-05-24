@@ -1,39 +1,18 @@
 import { FormEvent } from "react";
-import { object, parse, string } from "valibot";
 import { reuqestOrder } from "../../api/requestOrder";
 import { useAppSelector } from "../../app/hooks";
 import Btn from "../../components/ui/btn";
 import Input from "../../components/ui/Input";
 import FormInput from "./FormInput";
 import "./index.css";
-import type { CredentialsType } from "../../types/form.types.ts/CredentialsType";
 import { useNavigate } from "react-router-dom";
-import * as v from "valibot";
+import { localErrorValidator } from "../../utils/localErrorValidator";
 
-const orderSchema = v.object({
-  customer: v.pipe(
-    v.string(),
-    v.nonEmpty("Please enter your name"),
-    v.minLength(4, "Your name must have 4 characters or more."),
-    v.maxLength(20, "Your name can't have more than 20 characters."),
-  ),
-  phone: v.pipe(
-    v.string(),
-    v.nonEmpty("Please enter your phone number"),
-    v.minLength(6, "You entered wrong phone number format."),
-    v.maxLength(20, "You entered wrong phone number format."),
-  ),
-  address: v.pipe(
-    v.string(),
-    v.nonEmpty("Please enter your address"),
-    v.minLength(8, "You entered wrong adress format."),
-    v.maxLength(30, "Your entered wrong addres format")
-  )
-});
+
 
 const Checkout = () => {
- 
-
+  const cart = useAppSelector((state) => state.orders.orders);
+  
   const handleOrderValues = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -43,10 +22,16 @@ const Checkout = () => {
       address: formData.get("adress"),
       priority: formData.has("priority"),
     };
+    localErrorValidator(credentials);
+    console.log(credentials)
+    const order = { ...credentials, cart: cart, position: "" };
+    const {
+      data: { id: orderId },
+    } = await reuqestOrder(order);
   
   };
 
-
+ 
 
   return (
     <form className="checkout" onSubmit={handleOrderValues}>
