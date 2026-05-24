@@ -23,6 +23,7 @@ const Checkout = () => {
       priority: formData.has("priority"),
     };
     localErrorValidator(credentials);
+    console.log(credentials)
     const order = { ...credentials, cart: cart, position: "" };
     const { data: { id: orderId } } = await reuqestOrder(order);
     reddirectToOrder(orderId);
