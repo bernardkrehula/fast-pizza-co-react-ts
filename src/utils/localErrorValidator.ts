@@ -21,6 +21,7 @@ const orderSchema = v.object({
     v.maxLength(30, "Your entered wrong addres format"),
   ),
 });
+export type orderShema = typeof orderSchema;
 export const localErrorValidator = (credentials: CredentialsType) => {
   const response = v.parse(orderSchema, credentials);
   return response;
