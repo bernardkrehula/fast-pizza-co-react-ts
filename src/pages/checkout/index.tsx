@@ -10,20 +10,28 @@ import { localErrorValidator } from "../../utils/localErrorValidator";
 import type { orderShema } from "../../utils/localErrorValidator";
 import * as v from "valibot";
 import { GenericError } from "../../utils/GenericError";
+import { useDispatch } from "react-redux";
+import { setIsLoading } from "../../features/slices/loading-slice";
 
 const Checkout = () => {
-  const cart = useAppSelector((state) => state.orders.orders);
+  const { orders } = useAppSelector((state) => state.orders);
+  const loading = useAppSelector((state) => state.loading);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formError, setFormError] = useState<{customer: string; phone: string; address: string;}>({
+  const [formError, setFormError] = useState<{
+    customer: string;
+    phone: string;
+    address: string;
+  }>({
     customer: "",
     phone: "",
     address: "",
   });
-
   const handleOrderValues = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
+      dispatch(setIsLoading());
       const formData = new FormData(e.currentTarget);
       const credentials = {
         customer: formData.get("first_name") as string,
@@ -32,10 +40,11 @@ const Checkout = () => {
         priority: formData.has("priority"),
       };
       localErrorValidator(credentials);
-      const order = { ...credentials, cart: cart, position: "" };
+      const order = { ...credentials, cart: orders, position: "" };
       const {
         data: { id: orderId },
       } = await reuqestOrder(order);
+      dispatch(setIsLoading());
       reddirectToOrder(orderId);
     } catch (error) {
       if (error instanceof v.ValiError) {
@@ -49,7 +58,9 @@ const Checkout = () => {
             formErrors[issueKey] = nestedIssues[0];
           }
         }
-        setFormError(formErrors as { customer: string; phone: string; address: string; });
+        setFormError(
+          formErrors as { customer: string; phone: string; address: string },
+        );
       } else if (error instanceof GenericError) {
         console.error("GenericError caught:", error);
       } else {
@@ -61,6 +72,13 @@ const Checkout = () => {
   const reddirectToOrder = (orderId: string) => {
     navigate(`/order/${orderId}`);
   };
+  if(loading){
+    return (
+      <div className="loading-overlay">
+        <span className="loader"></span>
+      </div>
+    );
+  }
 
   return (
     <form className="checkout" onSubmit={handleOrderValues}>
