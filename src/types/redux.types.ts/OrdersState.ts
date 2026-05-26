@@ -1,10 +1,11 @@
 export type OrdersState = {
   orders: Array<{
-    id: string;
+    pizzaId: string;
     name: string;
     unitPrice: number;
-    amount: number;
+    quantity: number;
+    totalUnitPrice: number;
+    addIngredients: [];
+    removeIngredients: [];
   }>;
-  isLoading: boolean;
-  user: string;
 };
