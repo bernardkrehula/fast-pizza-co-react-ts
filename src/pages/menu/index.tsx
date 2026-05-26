@@ -9,8 +9,12 @@ const Menu = () => {
     queryKey: ["menu"],
     queryFn: () => requestMenu(),
   });
-  if (isLoading) return null;
-
+  if (isLoading)
+    return (
+      <div className="loading-overlay">
+        <span className="loader"></span>
+      </div>
+    );
   return (
     <main className="menu">
       <ul className="menu-list">
