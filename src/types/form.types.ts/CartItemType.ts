@@ -1,7 +1,9 @@
 export type CartItem = {
-  pizzaId: number;
+  pizzaId: string;
   name: string;
-  quantity: number;
   unitPrice: number;
-  totalPrice: number;
+  quantity: number;
+  totalUnitPrice: number;
+  addIngredients: [];
+  removeIngredients: [];
 };
