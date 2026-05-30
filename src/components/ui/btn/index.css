@@ -1,0 +1,23 @@
+.btn {
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  background-color: rgb(250 204 21);
+  padding: 15px 20px;
+  font-size: 1.6rem;
+  border-radius: 50px;
+  width: fit-content;
+  transition: 0.2s all;
+}
+.btn:hover {
+  background-color: rgb(255, 213, 47);
+}
+.secondary {
+  color: rgb(170, 170, 170);
+  background-color: transparent;
+  border: 2px solid rgb(170, 170, 170);
+}
+.secondary:hover {
+  color: black;
+  background-color: rgb(170, 170, 170);
+}
