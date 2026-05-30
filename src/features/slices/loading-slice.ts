@@ -1,13 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  isLoading: false,
-};
 const loadingSlice = createSlice({
   name: "loading",
-  initialState,
+  initialState: false,
   reducers: {
-    setIsLoading: () => {},
+    setIsLoading: (state) => !state,
   },
 });
 

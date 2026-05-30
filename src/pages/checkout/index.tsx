@@ -11,11 +11,14 @@ import type { orderShema } from "../../utils/localErrorValidator";
 import * as v from "valibot";
 import { GenericError } from "../../utils/GenericError";
 import { useDispatch } from "react-redux";
+import { clear } from "../../features/slices/orders-slice";
 import { setIsLoading } from "../../features/slices/loading-slice";
+import { toggleCartStatus } from "../../features/slices/cartStatus-slice";
 
 const Checkout = () => {
   const { orders } = useAppSelector((state) => state.orders);
   const loading = useAppSelector((state) => state.loading);
+  const { user } = useAppSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formError, setFormError] = useState<{
@@ -27,11 +30,11 @@ const Checkout = () => {
     phone: "",
     address: "",
   });
+  const [systemError, setSystemError] = useState<string>("");
   const handleOrderValues = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      dispatch(setIsLoading());
       const formData = new FormData(e.currentTarget);
       const credentials = {
         customer: formData.get("first_name") as string,
@@ -40,12 +43,14 @@ const Checkout = () => {
         priority: formData.has("priority"),
       };
       localErrorValidator(credentials);
+      dispatch(setIsLoading());
       const order = { ...credentials, cart: orders, position: "" };
       const {
         data: { id: orderId },
       } = await reuqestOrder(order);
-      dispatch(setIsLoading());
-      reddirectToOrder(orderId);
+      dispatch(clear())
+      /* dispatch(toggleCartStatus()); */ 
+      redirectToOrder(orderId);
     } catch (error) {
       if (error instanceof v.ValiError) {
         const flatIssues = v.flatten<orderShema>(error.issues);
@@ -63,16 +68,18 @@ const Checkout = () => {
         );
       } else if (error instanceof GenericError) {
         console.error("GenericError caught:", error);
+        setSystemError(error.message)
       } else {
         console.error("Unknown error:", error);
       }
     }
   };
 
-  const reddirectToOrder = (orderId: string) => {
+  const redirectToOrder = (orderId: string) => {
     navigate(`/order/${orderId}`);
+    dispatch(setIsLoading());
   };
-  if(loading){
+  if (loading) {
     return (
       <div className="loading-overlay">
         <span className="loader"></span>
@@ -89,22 +96,25 @@ const Checkout = () => {
       <div className="form-inputs">
         <FormInput
           credentials="First Name"
-          systemError=""
           type="text"
           name="first_name"
+          value={user}
           errorMessage={formError.customer}
+          systemError={systemError}
         />
         <FormInput
           credentials="Phone number"
           type="text"
           name="phone_number"
           errorMessage={formError.phone}
+          systemError={systemError}
         ></FormInput>
         <FormInput
           credentials="Adress"
           type="text"
           name="adress"
           errorMessage={formError.address}
+          systemError={systemError}
         />
       </div>
       <div className="checkbox-priority">

@@ -61,5 +61,6 @@ const ordersSlice = createSlice({
 });
 
 export const { increment, add, decrement, remove, clear } = ordersSlice.actions;
-export const { selectTotalPrice, selectTotalAmount } = ordersSlice.selectors;
+export const { selectTotalPrice, selectTotalAmount } =
+  ordersSlice.selectors;
 export default ordersSlice.reducer;

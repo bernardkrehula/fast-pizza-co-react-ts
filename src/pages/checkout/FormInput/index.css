@@ -1,16 +1,24 @@
 .form-input{
     display: flex;
+    justify-content: center;
     border: none;
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
 }
 .form-input label{
-    margin-right: auto;
     font-size: 1.6rem;
+    margin-right: auto;
+    margin-top: 10px;
 }
 .form-input span{
     font-size: 1.5rem;
     margin-right: auto;
     margin-top: 10px;
     margin-left: 100px;
+}
+.form-input-error{
+    display: flex;
+    flex-direction: column;
+}
+.form-input-error span{
+    margin-left: auto;
 }

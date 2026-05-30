@@ -4,4 +4,5 @@ export type FormInputType = {
     systemError?: string;
     credentials: string;
     errorMessage: string;
+    value?: string;
 }

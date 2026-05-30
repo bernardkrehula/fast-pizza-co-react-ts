@@ -6,27 +6,28 @@ import {
   add,
   decrement,
   increment,
-  removeSelectedMeal,
-} from "../../../features/counter/orders-slice";
+  remove,
+} from "../../../features/slices/orders-slice";
 
+//Ubuduce staviti redux van child komponenta jer bi child komponente morale biti pripremljene da su reusable
 const Meal = (meal: MealType) => {
   const { id, name, unitPrice, imageUrl, ingredients, soldOut } = meal;
   const orders = useAppSelector((state) => state.orders.orders);
-  const order = orders.find((meal) => meal.id === id);
+  const order = orders.find((meal) => meal.pizzaId === id);
   const dispatch = useAppDispatch();
-  const amount = order?.amount ?? 0;
+  const amount = order?.quantity ?? 0;
 
   const increaseAmount = () => {
     dispatch(increment(id));
   };
   const decreaseAmount = () => {
-    dispatch(decrement(id));
+    dispatch(decrement({ id, amount }));
   };
   const addMeal = () => {
     dispatch(add({ id, name, unitPrice }));
   };
   const removeMeal = () => {
-    dispatch(removeSelectedMeal(id));
+    dispatch(remove(id));
   };
 
   return (
@@ -58,7 +59,6 @@ const Meal = (meal: MealType) => {
                 -
               </Btn>
               {amount}
-              {/*  */}
               <Btn type="button" onClick={increaseAmount}>
                 +
               </Btn>

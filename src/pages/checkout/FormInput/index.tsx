@@ -2,13 +2,28 @@ import Input from "../../../components/ui/Input";
 import type { FormInputType } from "../../../types/ui.types.ts/FormInputType";
 import "./index.css";
 
-const FormInput = ({ credentials, type, name, error, systemError }: FormInputType) => {
+const FormInput = ({
+  credentials,
+  type,
+  name,
+  systemError,
+  errorMessage,
+  value,
+}: FormInputType) => {
   return (
     <fieldset className="form-input">
       <label>{credentials}</label>
-      <span>{systemError}</span>
-      <Input type={type} size='large' name={name} variation='secondary' />
-      <span>{error}</span>
+      <div className="form-input-error">
+        <p>{systemError}</p>
+        <Input
+          type={type}
+          size="large"
+          name={name}
+          value={value}
+          variation="secondary"
+        />
+        <span>{errorMessage}</span>
+      </div>
     </fieldset>
   );
 };

@@ -6,20 +6,28 @@ const Input = ({
   placeholder,
   onChange,
   variation,
-  type
+  type,
+  size,
+  name,
+  value,
 }: {
-  className: string;
-  placeholder: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement, HTMLInputElement>;
-  variation: string;
-  type: string
+  className?: string;
+  placeholder?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement, HTMLInputElement>;
+  variation?: string;
+  type?: string;
+  size?: string;
+  name?: string;
+  value?: string;
 }) => {
   return (
     <input
-      className={`search-bar ${className} ${variation}`}
+      className={`search-bar ${className} ${variation} ${size}`}
       type={type}
       onChange={onChange}
+      name={name}
       placeholder={placeholder}
+      defaultValue={value}
     />
   );
 };
